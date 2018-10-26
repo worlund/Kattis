@@ -11,9 +11,22 @@ c = n[3]
 d = n[4]
 k = n[5]
 
-res = []
+#print("p = ", p, " a = ", a, " b = ", b, " c = ", c, " d = ", d, " k = ", k)
+topValue = 0
+highestDecline = 0 
 for x in range(1, k+1):
-    res.append(p*(math.sin(a*x+b)+math.cos(c*x+d)+2))
+    priceX = (p*(math.sin(a*x+b)+math.cos(c*x+d)+2))
+    #print("PriceX = ", priceX, " x = ", x)
+    if x>1:
+        if(priceX > topValue):
+            #print("price greater replace ", priceX, " > ", topValue)
+            topValue = priceX
+        elif((topValue-priceX) > highestDecline):
+            #print("Higher decline, ", topValue, " - ", priceX, " = ", topValue-priceX, " < ", highestDecline)
+            highestDecline = topValue-priceX
+    else:
+        #print("FirstCase")
+        topValue = priceX
 
-res.sort()
-print(res[len(res)-1]-res[0])
+
+print(highestDecline)
